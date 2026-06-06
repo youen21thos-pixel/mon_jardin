@@ -234,8 +234,13 @@
   <!-- HISTORY -->
   <div class="view" id="view-history">
     <header style="padding-top:56px">
-      <div class="header-title">Historique</div>
-      <div class="header-date">Arrosages récents</div>
+      <div class="header-top">
+        <div>
+          <div class="header-title">Historique</div>
+          <div class="header-date">Arrosages récents</div>
+        </div>
+        <button class="notif-btn" onclick="openAddWatering()" style="font-size:18px;padding:8px 14px">＋</button>
+      </div>
     </header>
     <div class="section"><div id="history-list" style="padding-top:8px"></div></div>
   </div>
@@ -316,6 +321,31 @@
   </div>
   <button class="btn-primary" onclick="savePlant()">💾 Enregistrer</button>
   <button class="btn-danger" id="delete-plant-btn" onclick="deletePlant()" style="display:none">🗑️ Supprimer</button>
+</div>
+
+<!-- Sheet: ajout arrosage manuel -->
+<div class="sheet" id="sheet-add-watering">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title">Arrosage oublié</div>
+  <div class="sheet-subtitle">Ajoute un arrosage passé</div>
+
+  <div style="margin-bottom:12px">
+    <div style="font-size:13px;color:var(--text3);margin-bottom:8px">Plante</div>
+    <select class="input-field" id="manual-plant-select" style="margin:0"></select>
+  </div>
+
+  <div style="margin-bottom:16px">
+    <div style="font-size:13px;color:var(--text3);margin-bottom:8px">Date</div>
+    <input type="date" class="input-field" id="manual-date" style="margin:0;color-scheme:dark"/>
+  </div>
+
+  <div style="margin-bottom:20px">
+    <div style="font-size:13px;color:var(--text3);margin-bottom:8px">Heure (optionnel)</div>
+    <input type="time" class="time-input" id="manual-time" value="08:00" style="width:100%"/>
+  </div>
+
+  <button class="btn-primary" onclick="saveManualWatering()">💧 Enregistrer l'arrosage</button>
+  <button class="btn-secondary" onclick="closeSheet()">Annuler</button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -715,7 +745,7 @@ function renderHistory(){
     <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin:16px 0 8px">${date}</div>
     ${items.map(h=>`<div class="history-item">
       <div style="font-size:24px">${h.emoji}</div>
-      <div class="history-text">${h.plantName}</div>
+      <div class="history-text">${h.plantName}${h.manual?` <span style="font-size:10px;color:var(--text3);background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:1px 6px">manuel</span>`:''}</div>
       <div class="history-time">${new Date(h.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
     </div>`).join('')}`).join('');
 }
@@ -884,6 +914,58 @@ function switchView(name){
   if(name==='history') renderHistory();
   if(name==='stats') renderStats();
   if(name==='settings') renderSettings();
+}
+
+// ══════════════════════════════════════════
+//  AJOUT ARROSAGE MANUEL
+// ══════════════════════════════════════════
+function openAddWatering(){
+  // Populate plant select
+  const sel=document.getElementById('manual-plant-select');
+  sel.innerHTML=plants.map(p=>`<option value="${p.id}">${p.emoji} ${p.name}</option>`).join('');
+
+  // Default date = yesterday
+  const yesterday=new Date();
+  yesterday.setDate(yesterday.getDate()-1);
+  document.getElementById('manual-date').value=yesterday.toISOString().split('T')[0];
+  document.getElementById('manual-date').max=new Date().toISOString().split('T')[0];
+
+  // Don't allow future dates
+  document.getElementById('manual-time').value='08:00';
+  openSheet('sheet-add-watering');
+}
+
+function saveManualWatering(){
+  const plantId=parseInt(document.getElementById('manual-plant-select').value);
+  const date=document.getElementById('manual-date').value;
+  const time=document.getElementById('manual-time').value||'08:00';
+  if(!date){showToast('⚠️ Choisis une date');return}
+
+  const p=plants.find(x=>x.id===plantId);
+  if(!p) return;
+
+  const isoDate=`${date}T${time}:00`;
+
+  // Update lastWatered if this date is more recent
+  if(!p.lastWatered||new Date(isoDate)>new Date(p.lastWatered)){
+    p.lastWatered=isoDate;
+  }
+
+  // Add to history (avoid exact duplicate)
+  const alreadyExists=history.some(h=>h.plantId===plantId&&h.date?.startsWith(date));
+  if(!alreadyExists){
+    history.push({plantId,plantName:p.name,emoji:p.emoji,date:isoDate,manual:true});
+    // Re-sort history by date desc
+    history.sort((a,b)=>new Date(b.date)-new Date(a.date));
+    if(history.length>200) history=history.slice(0,200);
+  } else {
+    showToast('⚠️ Un arrosage existe déjà ce jour pour cette plante');
+    return;
+  }
+
+  saveData(); renderAll(); closeSheet();
+  showToast(`${p.emoji} Arrosage ajouté pour le ${new Date(isoDate).toLocaleDateString('fr-FR',{day:'numeric',month:'short'})}`);
+  setTimeout(()=>renderHistory(),100);
 }
 
 // ══════════════════════════════════════════
