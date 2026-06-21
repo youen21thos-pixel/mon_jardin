@@ -311,6 +311,11 @@ const PLANT_LIBRARY = [
     desc:"Aromatique et légume à la fois, le bulbe demande un grand pot.",
     months:{1:'dormant',2:'dormant',3:'dormant',4:'plantation',5:'croissance',6:'croissance',7:'croissance',8:'recolte',9:'recolte',10:'recolte',11:'dormant',12:'dormant'},
     seasonTips:{spring:"Plante après les gelées, sol riche nécessaire.",summer:"Arrosage régulier pour un bulbe tendre.",autumn:"Récolte avant les premières gelées.",winter:"Ne résiste pas bien au gel."}},
+  { key:'bananier', name:'Bananier', emoji:'🍌', category:'Fruits exotiques', freq:2, waterNeed:'high',
+    wiki:'https://fr.wikipedia.org/wiki/Bananier',
+    desc:"Plante tropicale à très grand développement, exige beaucoup d'eau, de chaleur et un pot profond. Craint le gel et le vent fort.",
+    months:{1:'dormant',2:'dormant',3:'croissance',4:'croissance',5:'croissance',6:'croissance',7:'floraison',8:'floraison',9:'recolte',10:'recolte',11:'dormant',12:'dormant'},
+    seasonTips:{spring:"Reprise de croissance rapide dès que les températures dépassent 15°C, sors-le progressivement.",summer:"Arrosage très généreux et fréquent, le bananier est très gourmand en eau, apporte de l'engrais riche en potassium toutes les 2 semaines.",autumn:"Ralentit avec la fraîcheur, rentre-le avant les premières nuits sous 12°C.",winter:"Hiverne impérativement en intérieur lumineux (min 12-15°C), réduis fortement l'arrosage, ne craint rien tant qu'il est protégé du gel."}},
 ];
 
 // Helper: obtenir la liste des catégories
