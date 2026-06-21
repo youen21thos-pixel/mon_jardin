@@ -176,6 +176,67 @@
   .water-anim{animation:waterDrop .4s ease}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
   .loading{animation:pulse 1.5s infinite}
+
+  /* ══════ SLIDER ANNULER ARROSAGE ══════ */
+  .plant-card{position:relative}
+  .swipe-wrap{position:relative;overflow:hidden;border-radius:var(--radius);margin-bottom:10px}
+  .swipe-bg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(239,154,154,.25),rgba(239,154,154,.1));display:flex;align-items:center;padding-left:20px;font-size:13px;color:var(--danger);font-weight:500;border-radius:var(--radius);opacity:0;transition:opacity .15s}
+  .swipe-bg.visible{opacity:1}
+  .plant-card.swiping{transition:none}
+  .plant-card.snap-back{transition:transform .3s cubic-bezier(.32,.72,0,1)}
+
+  /* ══════ BIBLIOTHÈQUE DE PLANTES ══════ */
+  .lib-search{width:100%;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 16px;color:var(--text);font-size:15px;font-family:'DM Sans',sans-serif;margin-bottom:14px}
+  .lib-search:focus{outline:none;border-color:var(--accent)}
+  .lib-categories{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;scrollbar-width:none}
+  .lib-categories::-webkit-scrollbar{display:none}
+  .lib-cat-chip{flex-shrink:0;padding:7px 14px;border-radius:100px;font-size:12px;background:var(--card);border:1px solid var(--border);color:var(--text3);cursor:pointer;white-space:nowrap;transition:all .15s}
+  .lib-cat-chip.active{background:rgba(76,175,80,.18);border-color:var(--accent);color:var(--accent2)}
+  .lib-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .lib-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;cursor:pointer;transition:all .2s;text-align:center}
+  .lib-card:active{transform:scale(.96)}
+  .lib-card .lib-emoji{font-size:30px;margin-bottom:6px}
+  .lib-card .lib-name{font-size:13px;font-weight:500;line-height:1.2}
+  .lib-card .lib-cat{font-size:10px;color:var(--text3);margin-top:3px}
+  .lib-card .lib-phase{display:inline-block;margin-top:6px;font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(76,175,80,.12);color:var(--accent2)}
+  .added-check{position:absolute;top:8px;right:8px;width:20px;height:20px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#0a1409}
+
+  /* Fiche plante (bibliothèque) */
+  .plant-sheet-header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .plant-sheet-emoji{font-size:48px}
+  .plant-sheet-desc{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:16px}
+  .wiki-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--water);text-decoration:none;background:rgba(79,195,247,.1);border:1px solid rgba(79,195,247,.25);padding:8px 14px;border-radius:10px;margin-bottom:16px}
+
+  /* Timeline annuelle (mini, dans fiche) */
+  .mini-timeline{display:flex;gap:2px;margin-bottom:8px}
+  .mini-timeline .mt-month{flex:1;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(255,255,255,.7);position:relative}
+  .mini-timeline .mt-month.is-now{outline:2px solid white;outline-offset:1px}
+  .timeline-legend{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px;font-size:11px}
+  .timeline-legend-item{display:flex;align-items:center;gap:4px;color:var(--text2)}
+  .timeline-legend-dot{width:8px;height:8px;border-radius:3px}
+
+  .season-tip-box{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px}
+  .season-tip-title{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .season-tip-text{font-size:14px;color:var(--text2);line-height:1.5}
+
+  /* ══════ PAGE PÉRIODES (remplace Stats) ══════ */
+  .period-month-selector{display:flex;align-items:center;justify-content:space-between;padding:0 24px;margin-bottom:4px}
+  .period-month-btn{width:34px;height:34px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .period-month-label{font-family:'Playfair Display',serif;font-size:20px;text-transform:capitalize}
+
+  .period-now-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:16px 24px 0}
+  .period-now-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px 6px;text-align:center;cursor:pointer;transition:all .15s}
+  .period-now-card:active{transform:scale(.95)}
+  .period-now-emoji{font-size:22px}
+  .period-now-name{font-size:10px;color:var(--text2);margin-top:4px;line-height:1.2}
+  .period-now-phase{font-size:9px;margin-top:3px;padding:2px 6px;border-radius:100px;display:inline-block}
+
+  .period-plant-row{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:10px;cursor:pointer}
+  .period-plant-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .period-plant-name{font-size:14px;font-weight:500;flex:1}
+  .period-plant-phase-badge{font-size:11px;padding:3px 10px;border-radius:100px}
+
+  .period-legend{display:flex;flex-wrap:wrap;gap:10px;padding:14px 24px;font-size:11px}
 </style>
 </head>
 <body>
@@ -227,7 +288,7 @@
     <div class="section">
       <div class="section-title">Toutes les plantes</div>
       <div id="list-all"></div>
-      <button class="add-btn" onclick="openAddPlant()">＋ Ajouter une plante</button>
+      <button class="add-btn" onclick="openLibrary()">＋ Ajouter une plante</button>
     </div>
   </div>
 
@@ -245,12 +306,27 @@
     <div class="section"><div id="history-list" style="padding-top:8px"></div></div>
   </div>
 
-  <!-- STATS -->
+  <!-- PÉRIODES (remplace Stats) -->
   <div class="view" id="view-stats">
-    <header style="padding-top:56px">
-      <div class="header-title">Mes <span style="font-style:italic;color:var(--accent2)">Stats</span></div>
+    <header style="padding-top:56px;padding-bottom:8px">
+      <div class="header-title">Mes <span style="font-style:italic;color:var(--accent2)">Périodes</span></div>
+      <div class="header-date" id="period-today-date"></div>
     </header>
-    <div class="stats-grid" id="stats-grid"></div>
+
+    <div class="section-title" style="padding:0 24px;margin-bottom:10px">En ce moment dans mon jardin</div>
+    <div class="period-now-grid" id="period-now-grid"></div>
+
+    <div class="period-legend" id="period-legend"></div>
+
+    <div class="period-month-selector">
+      <button class="period-month-btn" onclick="changePeriodMonth(-1)">‹</button>
+      <div class="period-month-label" id="period-month-label"></div>
+      <button class="period-month-btn" onclick="changePeriodMonth(1)">›</button>
+    </div>
+
+    <div class="section" style="padding-top:14px">
+      <div id="period-list"></div>
+    </div>
   </div>
 
   <!-- SETTINGS -->
@@ -291,7 +367,7 @@
 <nav class="bottom-nav">
   <button class="nav-btn active" id="nav-home" onclick="switchView('home')"><span class="nav-icon">🌿</span>Plantes</button>
   <button class="nav-btn" id="nav-history" onclick="switchView('history')"><span class="nav-icon">📋</span>Historique</button>
-  <button class="nav-btn" id="nav-stats" onclick="switchView('stats')"><span class="nav-icon">📊</span>Stats</button>
+  <button class="nav-btn" id="nav-stats" onclick="switchView('stats')"><span class="nav-icon">📅</span>Périodes</button>
   <button class="nav-btn" id="nav-settings" onclick="switchView('settings')"><span class="nav-icon">⚙️</span>Réglages</button>
 </nav>
 
@@ -301,6 +377,13 @@
   <div class="sheet-handle"></div>
   <div class="sheet-title" id="sheet-plant-title">Nouvelle plante</div>
   <div class="sheet-subtitle">Configure l'arrosage</div>
+  <div id="sheet-plant-libinfo" style="display:none">
+    <a class="wiki-link" id="sp-wiki" href="#" target="_blank" rel="noopener">📖 Voir sur Wikipédia</a>
+    <div class="season-tip-box">
+      <div class="season-tip-title"><span id="sp-season-icon"></span> <span id="sp-season-label"></span> — conseil du moment</div>
+      <div class="season-tip-text" id="sp-season-tip"></div>
+    </div>
+  </div>
   <div class="emoji-grid" id="emoji-grid"></div>
   <input class="input-field" id="plant-name-input" placeholder="Nom de la plante"/>
   <div style="margin-bottom:12px">
@@ -321,6 +404,51 @@
   </div>
   <button class="btn-primary" onclick="savePlant()">💾 Enregistrer</button>
   <button class="btn-danger" id="delete-plant-btn" onclick="deletePlant()" style="display:none">🗑️ Supprimer</button>
+</div>
+
+<!-- Sheet: Bibliothèque de plantes -->
+<div class="sheet" id="sheet-library" style="max-height:88vh">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title">Bibliothèque</div>
+  <div class="sheet-subtitle">40+ plantes prêtes à ajouter</div>
+  <input class="lib-search" id="lib-search" placeholder="🔍 Rechercher une plante..." oninput="renderLibrary()"/>
+  <div class="lib-categories" id="lib-categories"></div>
+  <div class="lib-grid" id="lib-grid"></div>
+</div>
+
+<!-- Sheet: Fiche plante détaillée (depuis bibliothèque) -->
+<div class="sheet" id="sheet-plant-detail" style="max-height:88vh">
+  <div class="sheet-handle"></div>
+  <div class="plant-sheet-header">
+    <div class="plant-sheet-emoji" id="pd-emoji"></div>
+    <div>
+      <div class="sheet-title" id="pd-name" style="margin-bottom:2px"></div>
+      <div style="font-size:12px;color:var(--text3)" id="pd-category"></div>
+    </div>
+  </div>
+  <div class="plant-sheet-desc" id="pd-desc"></div>
+  <a class="wiki-link" id="pd-wiki" href="#" target="_blank" rel="noopener">📖 Voir sur Wikipédia</a>
+
+  <div class="season-tip-title">🗓️ Cycle annuel</div>
+  <div class="mini-timeline" id="pd-timeline"></div>
+  <div class="timeline-legend" id="pd-timeline-legend"></div>
+
+  <div class="season-tip-box">
+    <div class="season-tip-title"><span id="pd-season-icon"></span> <span id="pd-season-label"></span> — conseil du moment</div>
+    <div class="season-tip-text" id="pd-season-tip"></div>
+  </div>
+
+  <div style="margin-bottom:16px">
+    <div style="font-size:13px;color:var(--text3);margin-bottom:8px">Fréquence d'arrosage suggérée</div>
+    <div class="freq-control">
+      <button class="freq-btn" onclick="changeLibFreq(-1)">−</button>
+      <div class="freq-val" id="pd-freq-display"></div>
+      <button class="freq-btn" onclick="changeLibFreq(1)">+</button>
+    </div>
+  </div>
+
+  <button class="btn-primary" id="pd-add-btn" onclick="addLibPlantToGarden()">＋ Ajouter à mon jardin</button>
+  <button class="btn-secondary" onclick="openSheet('sheet-library')">← Retour à la bibliothèque</button>
 </div>
 
 <!-- Sheet: ajout arrosage manuel -->
@@ -350,6 +478,7 @@
 
 <div class="toast" id="toast"></div>
 
+<script src="plants-db.js"></script>
 <script>
 // ══════════════════════════════════════════
 //  DATA
@@ -357,15 +486,15 @@
 const PLANTS_KEY='plantes_v4', HISTORY_KEY='arrosage_history', SETTINGS_KEY='plantes_settings_v2';
 
 const DEFAULT_PLANTS=[
-  {id:1,name:'Tomates',emoji:'🍅',freq:1,waterNeed:'high',lastWatered:null},
-  {id:2,name:'Framboisier',emoji:'🍓',freq:1,waterNeed:'high',lastWatered:null},
-  {id:3,name:'Menthe',emoji:'🌿',freq:1,waterNeed:'medium',lastWatered:null},
-  {id:4,name:'Persil',emoji:'🌱',freq:2,waterNeed:'medium',lastWatered:null},
-  {id:5,name:'Ciboulette',emoji:'🪴',freq:2,waterNeed:'medium',lastWatered:null},
-  {id:6,name:'Thym',emoji:'🌾',freq:4,waterNeed:'low',lastWatered:null},
-  {id:7,name:'Thym citronné',emoji:'🍋',freq:4,waterNeed:'low',lastWatered:null},
-  {id:8,name:'Kalanchoé',emoji:'🌸',freq:7,waterNeed:'low',lastWatered:null},
-  {id:9,name:'Œillets',emoji:'💐',freq:3,waterNeed:'low',lastWatered:null},
+  {id:1,name:'Tomates',emoji:'🍅',freq:1,waterNeed:'high',lastWatered:null,libKey:'tomate'},
+  {id:2,name:'Framboisier',emoji:'🍓',freq:1,waterNeed:'high',lastWatered:null,libKey:'framboisier'},
+  {id:3,name:'Menthe',emoji:'🌿',freq:1,waterNeed:'medium',lastWatered:null,libKey:'menthe'},
+  {id:4,name:'Persil',emoji:'🌱',freq:2,waterNeed:'medium',lastWatered:null,libKey:'persil'},
+  {id:5,name:'Ciboulette',emoji:'🪴',freq:2,waterNeed:'medium',lastWatered:null,libKey:'ciboulette'},
+  {id:6,name:'Thym',emoji:'🌾',freq:4,waterNeed:'low',lastWatered:null,libKey:'thym'},
+  {id:7,name:'Thym citronné',emoji:'🍋',freq:4,waterNeed:'low',lastWatered:null,libKey:'thym_citron'},
+  {id:8,name:'Kalanchoé',emoji:'🌸',freq:7,waterNeed:'low',lastWatered:null,libKey:'kalanchoe'},
+  {id:9,name:'Œillets',emoji:'💐',freq:3,waterNeed:'low',lastWatered:null,libKey:'oeillet'},
 ];
 const EMOJIS=['🍅','🍓','🌿','🌱','🪴','🌾','🍋','🌸','💐','🥬','🌻','🌺','🍃','🧅','🧄','🌶️','🥕','🍆','🥦','🌼','🫛','🫚'];
 
@@ -685,7 +814,7 @@ function plantCard(p){
     :`<button class="plant-action water-btn" id="water-btn-${p.id}" onclick="waterPlant(${p.id});event.stopPropagation()">💧</button>`;
   const seasonNote=isAdjusted
     ?`<div class="plant-freq-adjusted">${SEASON_INFO[getSeason()].icon} Fréquence saisonnière: ${freqLabel(ef)}</div>`:'';
-  return`<div class="plant-card ${s}${heatClass}" onclick="openEditPlant(${p.id})">
+  const cardHtml=`<div class="plant-card ${s}${heatClass}" id="card-${p.id}" data-plant-id="${p.id}" data-watered="${s==='done'?1:0}" onclick="handleCardClick(${p.id},event)">
     <div class="plant-emoji">${p.emoji}</div>
     <div class="plant-info">
       <div class="plant-name">${p.name}</div>
@@ -696,6 +825,68 @@ function plantCard(p){
     <span class="days-badge ${badgeClass}">${badgeText}</span>
     ${actionBtn}
   </div>`;
+  // Wrap watered-today cards in a swipe container to allow cancel via slide
+  if(s==='done'){
+    return`<div class="swipe-wrap" id="wrap-${p.id}">
+      <div class="swipe-bg" id="swipebg-${p.id}">↩️ Glisse pour annuler l'arrosage</div>
+      ${cardHtml}
+    </div>`;
+  }
+  return cardHtml;
+}
+
+function handleCardClick(id,e){
+  // Avoid opening edit sheet if a swipe just happened
+  if(e.currentTarget.dataset.swiped==='1'){ e.currentTarget.dataset.swiped='0'; return; }
+  openEditPlant(id);
+}
+
+// ══════════════════════════════════════════
+//  SWIPE TO CANCEL (plantes arrosées aujourd'hui)
+// ══════════════════════════════════════════
+function attachSwipeHandlers(){
+  document.querySelectorAll('.plant-card[data-watered="1"]').forEach(card=>{
+    let startX=0,currentX=0,dragging=false;
+    const id=parseInt(card.dataset.plantId);
+    const bg=document.getElementById(`swipebg-${id}`);
+
+    const onStart=(x)=>{ startX=x; dragging=true; card.classList.add('swiping'); card.classList.remove('snap-back'); };
+    const onMove=(x)=>{
+      if(!dragging) return;
+      currentX=x-startX;
+      if(currentX<0) currentX=0; // only allow right-swipe to reveal cancel
+      if(currentX>140) currentX=140;
+      card.style.transform=`translateX(${currentX}px)`;
+      if(bg) bg.classList.toggle('visible',currentX>20);
+    };
+    const onEnd=()=>{
+      if(!dragging) return;
+      dragging=false;
+      card.classList.remove('swiping');
+      card.classList.add('snap-back');
+      if(currentX>90){
+        // Trigger cancel
+        card.dataset.swiped='1';
+        card.style.transform='translateX(140px)';
+        setTimeout(()=>{ undoWater(id); },150);
+      } else {
+        card.style.transform='translateX(0)';
+        if(bg) bg.classList.remove('visible');
+      }
+      currentX=0;
+    };
+
+    card.addEventListener('touchstart',e=>onStart(e.touches[0].clientX),{passive:true});
+    card.addEventListener('touchmove',e=>onMove(e.touches[0].clientX),{passive:true});
+    card.addEventListener('touchend',onEnd);
+    // Mouse support for desktop testing
+    card.addEventListener('mousedown',e=>{ onStart(e.clientX);
+      const mm=ev=>onMove(ev.clientX);
+      const mu=()=>{ onEnd(); document.removeEventListener('mousemove',mm); document.removeEventListener('mouseup',mu); };
+      document.addEventListener('mousemove',mm);
+      document.addEventListener('mouseup',mu);
+    });
+  });
 }
 
 function renderLists(){
@@ -708,6 +899,7 @@ function renderLists(){
     ?urgent.map(plantCard).join('')
     :`<div style="color:var(--text3);font-size:14px;padding:12px 0">🎉 Toutes les plantes sont arrosées !</div>`;
   document.getElementById('list-all').innerHTML=all.map(plantCard).join('');
+  attachSwipeHandlers();
 }
 
 // ══════════════════════════════════════════
@@ -867,6 +1059,7 @@ function openAddPlant(){
   document.getElementById('water-need').value='medium';
   document.getElementById('delete-plant-btn').style.display='none';
   document.getElementById('emoji-grid').innerHTML=buildEmojiGrid(selectedEmoji);
+  document.getElementById('sheet-plant-libinfo').style.display='none';
   openSheet('sheet-plant');
 }
 function openEditPlant(id){
@@ -878,6 +1071,21 @@ function openEditPlant(id){
   document.getElementById('water-need').value=p.waterNeed;
   document.getElementById('delete-plant-btn').style.display='block';
   document.getElementById('emoji-grid').innerHTML=buildEmojiGrid(selectedEmoji);
+
+  // Si la plante est liée à la bibliothèque, montre wiki + conseil saisonnier
+  const libInfo=document.getElementById('sheet-plant-libinfo');
+  const lib=p.libKey?PLANT_LIBRARY.find(x=>x.key===p.libKey):null;
+  if(lib){
+    libInfo.style.display='block';
+    document.getElementById('sp-wiki').href=lib.wiki;
+    const s=getSeason();
+    document.getElementById('sp-season-icon').textContent=SEASON_INFO[s].icon;
+    document.getElementById('sp-season-label').textContent=SEASON_INFO[s].label;
+    document.getElementById('sp-season-tip').textContent=lib.seasonTips[s];
+  } else {
+    libInfo.style.display='none';
+  }
+
   openSheet('sheet-plant');
 }
 function savePlant(){
@@ -888,7 +1096,7 @@ function savePlant(){
     const p=plants.find(x=>x.id===editingPlantId);
     if(p){p.name=name;p.emoji=selectedEmoji;p.freq=currentFreq;p.waterNeed=waterNeed}
   }else{
-    plants.push({id:Date.now(),name,emoji:selectedEmoji,freq:currentFreq,waterNeed,lastWatered:null});
+    plants.push({id:Date.now(),name,emoji:selectedEmoji,freq:currentFreq,waterNeed,lastWatered:null,libKey:null});
   }
   saveData();renderAll();closeSheet();
   showToast(editingPlantId?'✅ Modifié':'🌱 Plante ajoutée !');
@@ -904,6 +1112,213 @@ function openSheet(id){document.getElementById('overlay').classList.add('show');
 function closeSheet(){document.getElementById('overlay').classList.remove('show');document.querySelectorAll('.sheet').forEach(s=>s.classList.remove('show'))}
 
 // ══════════════════════════════════════════
+//  BIBLIOTHÈQUE DE PLANTES (40+)
+// ══════════════════════════════════════════
+let libActiveCategory='Toutes';
+let libSelectedPlant=null;
+let libCurrentFreq=2;
+
+function openLibrary(){
+  libActiveCategory='Toutes';
+  document.getElementById('lib-search').value='';
+  renderLibrary();
+  openSheet('sheet-library');
+}
+
+function plantAlreadyAdded(key){
+  return plants.some(p=>p.libKey===key);
+}
+
+function renderLibrary(){
+  const cats=['Toutes',...getCategories()];
+  document.getElementById('lib-categories').innerHTML=cats.map(c=>
+    `<div class="lib-cat-chip${c===libActiveCategory?' active':''}" onclick="setLibCategory('${c}')">${c}</div>`
+  ).join('');
+
+  const query=(document.getElementById('lib-search').value||'').toLowerCase().trim();
+  let list=PLANT_LIBRARY;
+  if(libActiveCategory!=='Toutes') list=list.filter(p=>p.category===libActiveCategory);
+  if(query) list=list.filter(p=>p.name.toLowerCase().includes(query));
+
+  document.getElementById('lib-grid').innerHTML=list.map(p=>{
+    const phase=getCurrentPhase(p);
+    const added=plantAlreadyAdded(p.key);
+    return `<div class="lib-card" style="position:relative" onclick="openPlantDetail('${p.key}')">
+      ${added?'<div class="added-check">✓</div>':''}
+      <div class="lib-emoji">${p.emoji}</div>
+      <div class="lib-name">${p.name}</div>
+      <div class="lib-cat">${p.category}</div>
+      <div class="lib-phase" style="background:${PHASE_INFO[phase].color}22;color:${PHASE_INFO[phase].color}">${PHASE_INFO[phase].icon} ${PHASE_INFO[phase].label}</div>
+    </div>`;
+  }).join('') || `<div style="grid-column:1/-1;text-align:center;color:var(--text3);font-size:13px;padding:30px 0">Aucune plante trouvée</div>`;
+}
+function setLibCategory(c){ libActiveCategory=c; renderLibrary(); }
+
+function buildMiniTimeline(libPlant){
+  const monthNow=new Date().getMonth()+1;
+  const monthsShort=['J','F','M','A','M','J','J','A','S','O','N','D'];
+  let html='';
+  for(let m=1;m<=12;m++){
+    const phase=libPlant.months[m];
+    const info=PHASE_INFO[phase];
+    html+=`<div class="mt-month${m===monthNow?' is-now':''}" style="background:${info.color}" title="${info.label}">${monthsShort[m-1]}</div>`;
+  }
+  return html;
+}
+
+function openPlantDetail(key){
+  const lib=PLANT_LIBRARY.find(p=>p.key===key);
+  if(!lib) return;
+  libSelectedPlant=lib;
+  libCurrentFreq=lib.freq;
+
+  document.getElementById('pd-emoji').textContent=lib.emoji;
+  document.getElementById('pd-name').textContent=lib.name;
+  document.getElementById('pd-category').textContent=lib.category;
+  document.getElementById('pd-desc').textContent=lib.desc;
+  document.getElementById('pd-wiki').href=lib.wiki;
+  document.getElementById('pd-timeline').innerHTML=buildMiniTimeline(lib);
+
+  // Legend: only show phases present in this plant's cycle
+  const usedPhases=[...new Set(Object.values(lib.months))];
+  document.getElementById('pd-timeline-legend').innerHTML=usedPhases.map(ph=>
+    `<div class="timeline-legend-item"><span class="timeline-legend-dot" style="background:${PHASE_INFO[ph].color}"></span>${PHASE_INFO[ph].icon} ${PHASE_INFO[ph].label}</div>`
+  ).join('');
+
+  const s=getSeason();
+  document.getElementById('pd-season-icon').textContent=SEASON_INFO[s].icon;
+  document.getElementById('pd-season-label').textContent=SEASON_INFO[s].label;
+  document.getElementById('pd-season-tip').textContent=lib.seasonTips[s];
+
+  document.getElementById('pd-freq-display').textContent=freqLabel(libCurrentFreq);
+
+  const addBtn=document.getElementById('pd-add-btn');
+  if(plantAlreadyAdded(key)){
+    addBtn.textContent='✓ Déjà dans mon jardin';
+    addBtn.disabled=true;
+    addBtn.style.opacity='0.6';
+  } else {
+    addBtn.textContent='＋ Ajouter à mon jardin';
+    addBtn.disabled=false;
+    addBtn.style.opacity='1';
+  }
+
+  openSheet('sheet-plant-detail');
+}
+
+function changeLibFreq(delta){
+  libCurrentFreq=Math.max(1,Math.min(14,libCurrentFreq+delta));
+  document.getElementById('pd-freq-display').textContent=freqLabel(libCurrentFreq);
+}
+
+function addLibPlantToGarden(){
+  if(!libSelectedPlant) return;
+  if(plantAlreadyAdded(libSelectedPlant.key)){ showToast('✓ Déjà dans ton jardin'); return; }
+  plants.push({
+    id:Date.now(),
+    name:libSelectedPlant.name,
+    emoji:libSelectedPlant.emoji,
+    freq:libCurrentFreq,
+    waterNeed:libSelectedPlant.waterNeed,
+    lastWatered:null,
+    libKey:libSelectedPlant.key
+  });
+  saveData(); renderAll(); closeSheet();
+  showToast(`${libSelectedPlant.emoji} ${libSelectedPlant.name} ajoutée à ton jardin !`);
+}
+
+// ══════════════════════════════════════════
+//  PAGE PÉRIODES
+// ══════════════════════════════════════════
+let periodViewMonth=new Date().getMonth()+1; // 1-12
+
+function renderPeriods(){
+  document.getElementById('period-today-date').textContent=
+    new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+
+  // "En ce moment" grid — uses real current month, based on garden plants linked to library,
+  // falls back to all library plants if garden empty
+  const gardenLibKeys=plants.map(p=>p.libKey).filter(Boolean);
+  const nowMonth=new Date().getMonth()+1;
+  const sourceList=gardenLibKeys.length
+    ? PLANT_LIBRARY.filter(p=>gardenLibKeys.includes(p.key))
+    : PLANT_LIBRARY.slice(0,9);
+
+  document.getElementById('period-now-grid').innerHTML=sourceList.map(p=>{
+    const phase=p.months[nowMonth];
+    const info=PHASE_INFO[phase];
+    return `<div class="period-now-card" onclick="openPlantDetail('${p.key}')">
+      <div class="period-now-emoji">${p.emoji}</div>
+      <div class="period-now-name">${p.name}</div>
+      <div class="period-now-phase" style="background:${info.color}22;color:${info.color}">${info.icon}</div>
+    </div>`;
+  }).join('') || `<div style="grid-column:1/-1;text-align:center;color:var(--text3);font-size:13px;padding:10px 0">Ajoute des plantes pour voir leurs périodes</div>`;
+
+  // Legend
+  document.getElementById('period-legend').innerHTML=Object.entries(PHASE_INFO).map(([k,v])=>
+    `<div class="timeline-legend-item"><span class="timeline-legend-dot" style="background:${v.color}"></span>${v.icon} ${v.label}</div>`
+  ).join('');
+
+  renderPeriodMonth();
+}
+
+function changePeriodMonth(delta){
+  periodViewMonth+=delta;
+  if(periodViewMonth>12) periodViewMonth=1;
+  if(periodViewMonth<1) periodViewMonth=12;
+  renderPeriodMonth();
+}
+
+const MONTH_NAMES=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+function renderPeriodMonth(){
+  const isCurrent=periodViewMonth===(new Date().getMonth()+1);
+  document.getElementById('period-month-label').textContent=
+    MONTH_NAMES[periodViewMonth-1]+(isCurrent?' (en cours)':'');
+
+  const gardenLibKeys=plants.map(p=>p.libKey).filter(Boolean);
+  const sourceList=gardenLibKeys.length
+    ? PLANT_LIBRARY.filter(p=>gardenLibKeys.includes(p.key))
+    : PLANT_LIBRARY;
+
+  // Group by phase for this month
+  const byPhase={};
+  sourceList.forEach(p=>{
+    const phase=p.months[periodViewMonth];
+    if(!byPhase[phase]) byPhase[phase]=[];
+    byPhase[phase].push(p);
+  });
+
+  const order=['floraison','recolte','plantation','croissance','taille','dormant'];
+  let html='';
+  order.forEach(phase=>{
+    if(!byPhase[phase]||!byPhase[phase].length) return;
+    const info=PHASE_INFO[phase];
+    html+=`<div class="section-title" style="padding:0;margin:18px 0 10px">${info.icon} ${info.label}</div>`;
+    byPhase[phase].forEach(p=>{
+      html+=`<div class="period-plant-row" onclick="openPlantDetail('${p.key}')">
+        <div class="period-plant-top">
+          <span style="font-size:24px">${p.emoji}</span>
+          <span class="period-plant-name">${p.name}</span>
+          <span class="period-plant-phase-badge" style="background:${info.color}22;color:${info.color}">${info.icon} ${info.label}</span>
+        </div>
+        <div style="font-size:12px;color:var(--text3)">${p.seasonTips[monthToSeasonKey(periodViewMonth)]}</div>
+      </div>`;
+    });
+  });
+
+  document.getElementById('period-list').innerHTML=html ||
+    `<div style="color:var(--text3);font-size:14px;padding:20px 0;text-align:center">Aucune plante à afficher pour ce mois</div>`;
+}
+
+function monthToSeasonKey(m){
+  if(m>=3&&m<=5) return 'spring';
+  if(m>=6&&m<=8) return 'summer';
+  if(m>=9&&m<=11) return 'autumn';
+  return 'winter';
+}
+
+// ══════════════════════════════════════════
 //  NAV
 // ══════════════════════════════════════════
 function switchView(name){
@@ -912,7 +1327,7 @@ function switchView(name){
   document.getElementById('view-'+name).classList.add('active');
   document.getElementById('nav-'+name).classList.add('active');
   if(name==='history') renderHistory();
-  if(name==='stats') renderStats();
+  if(name==='stats') renderPeriods();
   if(name==='settings') renderSettings();
 }
 
