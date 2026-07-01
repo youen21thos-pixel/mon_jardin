@@ -20,6 +20,13 @@
     --text:#e8f5e9;--text2:#a5d6a7;--text3:#6a9b6e;
     --border:#2d4a2c;--radius:18px;
   }
+  /* ── MODE CLAIR ── */
+  [data-theme="light"] {
+    --bg:#f1f8f1;--bg2:#e8f5e9;--bg3:#dcedc8;--card:#ffffff;--card2:#f5fbf5;
+    --text:#1b3a1a;--text2:#2e6b2c;--text3:#6a9b6e;
+    --border:#c8e6c9;
+    --accent:#2e7d32;--accent2:#388e3c;--accent3:#43a047;
+  }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;overflow-x:hidden}
   body::before{content:'';position:fixed;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(45,90,39,.15) 0%,transparent 70%);pointer-events:none;z-index:0}
@@ -49,6 +56,26 @@
   .badge-frost{background:rgba(128,222,234,.15);border:1px solid rgba(128,222,234,.3);color:var(--frost)}
   .badge-ok{background:rgba(76,175,80,.12);border:1px solid rgba(76,175,80,.25);color:var(--accent2)}
   .badge-season{background:rgba(165,214,167,.1);border:1px solid rgba(165,214,167,.2);color:var(--accent3)}
+
+  /* ══════ 7 JOURS FORECAST ══════ */
+  .forecast-7days{display:flex;gap:4px;padding:10px 12px 12px;background:var(--bg2);border-top:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+  .forecast-7days::-webkit-scrollbar{display:none}
+  .forecast-day{flex:1;min-width:44px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:10px;transition:background .15s}
+  .forecast-day.forecast-today{background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.2)}
+  .forecast-day-label{font-size:10px;color:var(--text3);font-weight:500}
+  .forecast-today .forecast-day-label{color:var(--accent2)}
+  .forecast-day-icon{font-size:16px}
+  .forecast-day-temp{font-size:11px;color:var(--text2);font-weight:500}
+  .forecast-day-precip{font-size:9px;color:var(--text3)}
+  .forecast-day-precip.has-rain{color:var(--water)}
+  .forecast-advice{font-size:13px;margin-top:2px}
+  .forecast-advice-rain{filter:hue-rotate(200deg)}
+  .forecast-advice-heat{filter:hue-rotate(0deg)}
+  .forecast-advice-wind{filter:hue-rotate(180deg)}
+  .forecast-advice-ok{opacity:.8}
+
+  /* ══════ BANNIÈRE VENT ══════ */
+  .wind-banner{margin:8px 24px 0;padding:10px 16px;background:rgba(129,212,250,.08);border:1px solid rgba(129,212,250,.25);border-radius:12px;font-size:13px;color:#81d4fa;display:flex;align-items:center;gap:8px}
 
   /* Hourly rain forecast bar */
   .rain-forecast{padding:10px 16px 12px;background:var(--bg2);border-top:1px solid var(--border)}
@@ -170,6 +197,51 @@
   .gps-btn:hover{background:rgba(79,195,247,.2)}
   .gps-btn.located{background:rgba(76,175,80,.1);border-color:rgba(76,175,80,.3);color:var(--accent2)}
 
+  /* ══════ SCORE SANTÉ ══════ */
+  .health-score-bar{height:4px;border-radius:2px;margin-top:5px;overflow:hidden;background:var(--border)}
+  .health-score-fill{height:100%;border-radius:2px;transition:width .6s ease}
+  .health-score-label{font-size:10px;font-weight:600;margin-top:2px}
+  .score-excellent{color:#81c784}.score-bon{color:#aed581}.score-moyen{color:#ffb74d}.score-faible{color:#ef9a9a}
+
+  .global-score-card{margin:0 24px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px}
+  .global-score-circle{width:56px;height:56px;flex-shrink:0;position:relative}
+  .global-score-circle svg{transform:rotate(-90deg)}
+  .global-score-circle .score-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700}
+  .global-score-info{flex:1}
+  .global-score-title{font-size:13px;font-weight:500;color:var(--text)}
+  .global-score-sub{font-size:11px;color:var(--text3);margin-top:2px}
+  .global-score-detail{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+  .score-criterion{font-size:10px;padding:2px 8px;border-radius:100px;background:var(--bg2);border:1px solid var(--border);color:var(--text3)}
+  .diag-btn{width:34px;height:34px;border-radius:50%;border:none;background:rgba(165,214,167,.12);border:1px solid rgba(165,214,167,.25);color:var(--accent3);font-size:16px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-left:4px}
+  .diag-btn:hover{background:rgba(165,214,167,.22);transform:scale(1.1)}
+
+  .diag-upload-zone{border:2px dashed var(--border);border-radius:16px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:16px;position:relative}
+  .diag-upload-zone:hover,.diag-upload-zone.drag{border-color:var(--accent);background:rgba(76,175,80,.05)}
+  .diag-upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+  .diag-upload-icon{font-size:36px;margin-bottom:8px}
+  .diag-upload-label{font-size:14px;color:var(--text2)}
+  .diag-upload-sub{font-size:12px;color:var(--text3);margin-top:4px}
+
+  .diag-preview{width:100%;border-radius:14px;max-height:220px;object-fit:cover;margin-bottom:16px;display:none}
+
+  .diag-result{background:var(--card2);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:14px;display:none}
+  .diag-result-title{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .diag-result-text{font-size:14px;color:var(--text2);line-height:1.6;white-space:pre-wrap}
+  .diag-severity{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;margin-bottom:12px}
+  .diag-severity.ok{background:rgba(76,175,80,.15);color:var(--accent2)}
+  .diag-severity.warn{background:rgba(255,183,77,.15);color:var(--warn)}
+  .diag-severity.danger{background:rgba(239,154,154,.15);color:var(--danger)}
+
+  .diag-analyzing{display:none;text-align:center;padding:24px;color:var(--text3);font-size:14px}
+  .diag-analyzing .spin{display:inline-block;font-size:28px;animation:spin 1s linear infinite;margin-bottom:8px}
+  @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+  .diag-history{margin-top:16px}
+  .diag-history-title{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:10px}
+  .diag-history-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer}
+  .diag-history-date{font-size:11px;color:var(--text3);margin-bottom:4px}
+  .diag-history-summary{font-size:13px;color:var(--text2)}
+
   .view{display:none}.view.active{display:block}
   @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
   @keyframes waterDrop{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
@@ -265,18 +337,39 @@
         <span class="loading" style="color:var(--text3);font-size:14px">Chargement météo...</span>
       </div>
       <div class="rain-forecast" id="rain-forecast" style="display:none">
-        <div class="rain-forecast-title">Précipitations prévues — 12h</div>
+        <div class="rain-forecast-title" id="rain-forecast-title">Précipitations prévues — 12h</div>
         <div class="rain-bars" id="rain-bars"></div>
       </div>
+      <div class="forecast-7days" id="forecast-7days"></div>
     </div>
 
     <!-- Banners -->
     <div id="heat-banner" style="display:none" class="heat-banner">🔥 <span id="heat-banner-text"></span></div>
     <div id="frost-banner" style="display:none" class="frost-banner">❄️ <span id="frost-banner-text"></span></div>
+    <div id="wind-banner" style="display:none" class="wind-banner">💨 <span id="wind-banner-text"></span></div>
     <div id="season-bar" class="season-bar" style="display:none">
       <span id="season-icon"></span>
       <span id="season-text" style="flex:1"></span>
       <span class="badge badge-season" id="season-badge"></span>
+    </div>
+
+    <!-- Score santé global -->
+    <div class="global-score-card" id="global-score-card" style="margin-top:12px;display:none">
+      <div class="global-score-circle">
+        <svg width="56" height="56" viewBox="0 0 56 56">
+          <circle cx="28" cy="28" r="23" fill="none" stroke="var(--border)" stroke-width="5"/>
+          <circle cx="28" cy="28" r="23" fill="none" id="score-circle-fill"
+            stroke="#4caf50" stroke-width="5"
+            stroke-dasharray="144.51" stroke-dashoffset="144.51"
+            stroke-linecap="round"/>
+        </svg>
+        <div class="score-num" id="global-score-num">—</div>
+      </div>
+      <div class="global-score-info">
+        <div class="global-score-title" id="global-score-title">Santé du jardin</div>
+        <div class="global-score-sub" id="global-score-sub"></div>
+        <div class="global-score-detail" id="global-score-detail"></div>
+      </div>
     </div>
 
     <div class="summary" id="summary-pills"></div>
@@ -359,6 +452,13 @@
         <div><div class="setting-label">📍 Position GPS</div><div class="setting-sub" id="gps-setting-status">Non activée</div></div>
         <button class="gps-btn" id="gps-setting-btn" onclick="requestGPS()">📍 Activer</button>
       </div>
+      <div class="setting-row" style="border:none;margin-top:8px">
+        <div><div class="setting-label">🌓 Thème</div><div class="setting-sub">Sombre / Clair (vert conservé)</div></div>
+        <label class="toggle">
+          <input type="checkbox" id="theme-toggle" onchange="handleThemeToggle(this)"/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
     </div>
   </div>
 </div>
@@ -406,7 +506,49 @@
   <button class="btn-danger" id="delete-plant-btn" onclick="deletePlant()" style="display:none">🗑️ Supprimer</button>
 </div>
 
-<!-- Sheet: Bibliothèque de plantes -->
+<!-- Sheet: Diagnostic photo IA -->
+<div class="sheet" id="sheet-diag" style="max-height:90vh">
+  <div class="sheet-handle"></div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+    <div class="sheet-title" style="margin:0" id="diag-plant-name">Diagnostic</div>
+    <span id="diag-plant-emoji" style="font-size:24px"></span>
+  </div>
+  <div class="sheet-subtitle" id="diag-plant-subtitle">Prends ou uploade une photo de ta plante</div>
+
+  <!-- Upload zone -->
+  <div class="diag-upload-zone" id="diag-upload-zone" onclick="document.getElementById('diag-file-input').click()">
+    <input type="file" id="diag-file-input" accept="image/*" capture="environment" onchange="handleDiagPhoto(this)"/>
+    <div class="diag-upload-icon">📸</div>
+    <div class="diag-upload-label">Prendre une photo ou choisir depuis la galerie</div>
+    <div class="diag-upload-sub">L'IA analysera l'état de santé de ta plante</div>
+  </div>
+
+  <!-- Preview photo -->
+  <img id="diag-preview" class="diag-preview" alt="Photo plante"/>
+
+  <!-- Analyzing spinner -->
+  <div class="diag-analyzing" id="diag-analyzing">
+    <div class="spin">🔍</div>
+    <div>Analyse en cours...</div>
+    <div style="font-size:12px;margin-top:4px;color:var(--text3)">L'IA examine ta plante</div>
+  </div>
+
+  <!-- Result -->
+  <div class="diag-result" id="diag-result">
+    <div id="diag-severity-badge"></div>
+    <div class="diag-result-title">🌿 Diagnostic</div>
+    <div class="diag-result-text" id="diag-result-text"></div>
+    <button class="btn-secondary" style="margin-top:12px" onclick="resetDiag()">📸 Nouvelle photo</button>
+  </div>
+
+  <!-- Historique diagnostics -->
+  <div class="diag-history" id="diag-history" style="display:none">
+    <div class="diag-history-title">Diagnostics précédents</div>
+    <div id="diag-history-list"></div>
+  </div>
+</div>
+
+
 <div class="sheet" id="sheet-library" style="max-height:88vh">
   <div class="sheet-handle"></div>
   <div class="sheet-title">Bibliothèque</div>
@@ -579,39 +721,69 @@ function requestGPS(){
 //  MÉTÉO FRANCE via Open-Meteo
 //  (Open-Meteo utilise les données AROME de Météo France pour la France)
 // ══════════════════════════════════════════
+// ══════════════════════════════════════════
+//  MÉMOIRE PLUIE (stocke les précip des dernières 48h)
+// ══════════════════════════════════════════
+const RAIN_MEMORY_KEY = 'rain_memory';
+
+function loadRainMemory(){ try{ return JSON.parse(localStorage.getItem(RAIN_MEMORY_KEY))||[]; }catch{ return []; } }
+function saveRainMemory(entries){ localStorage.setItem(RAIN_MEMORY_KEY, JSON.stringify(entries.slice(0,96))); }
+
+function recordRainMemory(precipNow){
+  const entries = loadRainMemory();
+  entries.unshift({ ts: Date.now(), precip: precipNow });
+  // Garde 48h max
+  const cutoff = Date.now() - 48*3600*1000;
+  saveRainMemory(entries.filter(e => e.ts > cutoff));
+}
+
+function getPastPrecip48h(){
+  return loadRainMemory().reduce((a,b) => a + (b.precip||0), 0);
+}
+
+function getPastPrecipLabel(){
+  const p = getPastPrecip48h();
+  if(p <= 0) return null;
+  return `${p.toFixed(1)}mm tombés ces dernières 48h`;
+}
+
 async function fetchWeather(){
   let lat,lon;
   if(gpsCoords){
     lat=gpsCoords.lat; lon=gpsCoords.lon;
   } else {
-    // Fallback geocoding
     try{
       const city=settings.city||'Meudon';
       const geo=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`);
       const gd=await geo.json();
       if(!gd.results?.[0]) throw new Error('not found');
       lat=gd.results[0].latitude; lon=gd.results[0].longitude;
-    }catch{
-      renderWeatherError(); return;
-    }
+    }catch{ renderWeatherError(); return; }
   }
 
   try{
-    // Open-Meteo avec modèle météo-france (AROME) pour la précision
+    // 7 jours de prévisions + vent + pluie passée (past_days=2)
     const url=`https://api.open-meteo.com/v1/forecast`+
       `?latitude=${lat}&longitude=${lon}`+
-      `&hourly=precipitation,temperature_2m,weathercode`+
-      `&daily=precipitation_sum,temperature_2m_max,temperature_2m_min,weathercode`+
-      `&timezone=auto&forecast_days=2&models=meteofrance_arome_france`;
+      `&hourly=precipitation,temperature_2m,weathercode,windspeed_10m,windgusts_10m`+
+      `&daily=precipitation_sum,temperature_2m_max,temperature_2m_min,weathercode,windspeed_10m_max,windgusts_10m_max`+
+      `&timezone=auto&forecast_days=7&past_days=2&models=meteofrance_arome_france`;
     const res=await fetch(url);
     const d=await res.json();
 
-    // Extract today's data
     const now=new Date();
-    const currentHour=now.getHours();
     const todayDate=now.toISOString().split('T')[0];
 
-    // Hourly for next 12h
+    // ── Pluie passée (48h avant maintenant) ──
+    let pastPrecip48h=0;
+    for(let i=0;i<d.hourly.time.length;i++){
+      const t=new Date(d.hourly.time[i]);
+      const diffH=(now-t)/3600000;
+      if(diffH>0 && diffH<=48) pastPrecip48h+=(d.hourly.precipitation[i]||0);
+    }
+    recordRainMemory(pastPrecip48h);
+
+    // ── Prochaines 12h ──
     const next12h=[];
     for(let i=0;i<d.hourly.time.length;i++){
       const t=new Date(d.hourly.time[i]);
@@ -619,28 +791,59 @@ async function fetchWeather(){
       if(diffH>=0&&diffH<12) next12h.push({
         hour:t.getHours(),
         precip:d.hourly.precipitation[i]||0,
-        temp:d.hourly.temperature_2m[i]
+        temp:d.hourly.temperature_2m[i],
+        wind:d.hourly.windspeed_10m[i]||0,
+        gusts:d.hourly.windgusts_10m[i]||0
       });
     }
 
+    // ── 7 jours daily ──
+    const forecast7=[];
+    for(let i=0;i<d.daily.time.length;i++){
+      const dayDate=d.daily.time[i];
+      forecast7.push({
+        date: dayDate,
+        isToday: dayDate===todayDate,
+        isPast: new Date(dayDate)<new Date(todayDate),
+        precip: d.daily.precipitation_sum[i]||0,
+        tmax: d.daily.temperature_2m_max[i],
+        tmin: d.daily.temperature_2m_min[i],
+        wcode: d.daily.weathercode[i],
+        windMax: d.daily.windspeed_10m_max[i]||0,
+        gustMax: d.daily.windgusts_10m_max[i]||0,
+      });
+    }
+
+    // ── Valeurs du jour ──
+    const todayForecast=forecast7.find(f=>f.isToday)||forecast7[2];
+    const maxTemp=todayForecast.tmax;
+    const minTemp=todayForecast.tmin;
+    const dailyPrecip=todayForecast.precip;
+    const wcode=todayForecast.wcode;
+    const maxGust=todayForecast.gustMax;
+    const maxWind=todayForecast.windMax;
+
+    // ── Niveau pluie : prend en compte passé + futur 12h ──
     const totalPrecip12h=next12h.reduce((a,b)=>a+b.precip,0);
-    const maxTemp=d.daily.temperature_2m_max[0];
-    const minTemp=d.daily.temperature_2m_min[0];
-    const dailyPrecip=d.daily.precipitation_sum[0];
-    const wcode=d.daily.weathercode[0];
+    // Si grosse pluie dans les 48h passées → prise en compte
+    const effectivePrecip = totalPrecip12h + (pastPrecip48h>5 ? pastPrecip48h*0.3 : 0);
+    const precipLevel = effectivePrecip>8?'heavy':effectivePrecip>=3?'moderate':'light';
 
-    // Precip classification
-    // >8mm = forte pluie (skip tout)
-    // 3-8mm = pluie modérée (skip high, garder low)
-    // <3mm = légère / nulle
-    const precipLevel = totalPrecip12h>8?'heavy':totalPrecip12h>=3?'moderate':'light';
+    // ── Alerte vent ──
+    const isWindy = maxGust>=40 || maxWind>=30;
+    const isVeryWindy = maxGust>=60;
 
-    weatherData={lat,lon,maxTemp,minTemp,dailyPrecip,totalPrecip12h,precipLevel,next12h,wcode,
-      isHeatwave:maxTemp>=30,isFrost:minTemp<=2};
+    weatherData={
+      lat,lon,maxTemp,minTemp,dailyPrecip,totalPrecip12h,pastPrecip48h,
+      precipLevel,next12h,wcode,forecast7,
+      isHeatwave:maxTemp>=30,isFrost:minTemp<=2,
+      isWindy,isVeryWindy,maxGust,maxWind
+    };
 
     renderWeatherPanel();
     renderAll();
   }catch(e){
+    console.error(e);
     renderWeatherError();
   }
 }
@@ -657,19 +860,33 @@ function renderWeatherError(){
 const WCODES={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',80:'🌧️',81:'🌧️',95:'⛈️'};
 function wIcon(code){return Object.entries(WCODES).reverse().find(([k])=>code>=parseInt(k))?.[1]||'🌡️'}
 
+const DAY_SHORT=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+
+function wateringAdvice(day){
+  if(day.isPast) return null;
+  const lev = day.precip>8?'heavy':day.precip>=3?'moderate':'light';
+  if(lev==='heavy') return {icon:'🌧️',text:'Skip',cls:'rain'};
+  if(lev==='moderate') return {icon:'🌦️',text:'Léger',cls:'rain'};
+  if(day.tmax>=30) return {icon:'🔥',text:'2×/jour',cls:'heat'};
+  if(day.gustMax>=40) return {icon:'💨',text:'Arroser tôt',cls:'wind'};
+  return {icon:'💧',text:'Normal',cls:'ok'};
+}
+
 function renderWeatherPanel(){
   if(!weatherData) return;
   const panel=document.getElementById('weather-panel');
   panel.style.display='block';
-  const {maxTemp,minTemp,totalPrecip12h,precipLevel,next12h,wcode,dailyPrecip}=weatherData;
+  const {maxTemp,minTemp,totalPrecip12h,pastPrecip48h,precipLevel,next12h,wcode,dailyPrecip,forecast7,maxGust,isWindy,isVeryWindy}=weatherData;
 
-  // Badges
+  // Badges aujourd'hui
   let badges='';
-  if(precipLevel==='heavy') badges+=`<span class="badge badge-rain">🌧️ ${totalPrecip12h.toFixed(1)}mm — Skip arrosage</span>`;
-  else if(precipLevel==='moderate') badges+=`<span class="badge badge-rain">🌦️ ${totalPrecip12h.toFixed(1)}mm — Skip partiel</span>`;
-  else badges+=`<span class="badge badge-sun">☀️ Arrosage recommandé</span>`;
-  if(weatherData.isHeatwave) badges+=`<span class="badge badge-heat">🔥 Canicule ${maxTemp}°C</span>`;
-  if(weatherData.isFrost) badges+=`<span class="badge badge-frost">❄️ Gel ${minTemp}°C</span>`;
+  if(precipLevel==='heavy') badges+=`<span class="badge badge-rain">🌧️ Skip arrosage</span>`;
+  else if(precipLevel==='moderate') badges+=`<span class="badge badge-rain">🌦️ Skip partiel</span>`;
+  else badges+=`<span class="badge badge-sun">💧 Arrosage recommandé</span>`;
+  if(pastPrecip48h>3) badges+=`<span class="badge badge-rain">🕐 ${pastPrecip48h.toFixed(1)}mm/48h passées</span>`;
+  if(weatherData.isHeatwave) badges+=`<span class="badge badge-heat">🔥 ${Math.round(maxTemp)}°C</span>`;
+  if(weatherData.isFrost) badges+=`<span class="badge badge-frost">❄️ ${Math.round(minTemp)}°C</span>`;
+  if(isWindy) badges+=`<span class="badge" style="background:rgba(129,212,250,.12);border:1px solid rgba(129,212,250,.3);color:#81d4fa">💨 Rafales ${Math.round(maxGust)}km/h</span>`;
 
   const locationLabel=gpsCoords?`${gpsCoords.lat.toFixed(2)}°N ${Math.abs(gpsCoords.lon).toFixed(2)}°${gpsCoords.lon>=0?'E':'O'}`:(settings.city||'Meudon');
 
@@ -677,14 +894,15 @@ function renderWeatherPanel(){
     <span class="weather-icon-big">${wIcon(wcode)}</span>
     <div class="weather-details">
       <div class="weather-temp-line">${locationLabel} · ${Math.round(minTemp)}–${Math.round(maxTemp)}°C</div>
-      <div class="weather-sub">Pluie 12h prochaines : ${totalPrecip12h.toFixed(1)}mm · Journée : ${dailyPrecip.toFixed(1)}mm</div>
+      <div class="weather-sub">Pluie 12h à venir : ${totalPrecip12h.toFixed(1)}mm${pastPrecip48h>0?' · 48h passées : '+pastPrecip48h.toFixed(1)+'mm':''}</div>
       <div class="weather-badges">${badges}</div>
     </div>`;
 
-  // Hourly bars
+  // Barres pluie 12h
   if(next12h.length>0){
     const rainForecast=document.getElementById('rain-forecast');
     rainForecast.style.display='block';
+    document.getElementById('rain-forecast-title').textContent='Précipitations prévues — 12h';
     const maxP=Math.max(...next12h.map(h=>h.precip),1);
     document.getElementById('rain-bars').innerHTML=next12h.map(h=>`
       <div class="rain-bar-wrap">
@@ -693,21 +911,53 @@ function renderWeatherPanel(){
       </div>`).join('');
   }
 
+  // ── Planning 7 jours ──
+  const forecast7El=document.getElementById('forecast-7days');
+  if(forecast7El && forecast7){
+    const futureDays=forecast7.filter(f=>!f.isPast);
+    forecast7El.innerHTML=futureDays.map(f=>{
+      const advice=wateringAdvice(f);
+      const dayLabel=f.isToday?'Auj.':DAY_SHORT[new Date(f.date+'T12:00:00').getDay()];
+      const windBadge=f.gustMax>=40?`<div style="font-size:9px;color:#81d4fa">💨${Math.round(f.gustMax)}</div>`:'';
+      return `<div class="forecast-day${f.isToday?' forecast-today':''}">
+        <div class="forecast-day-label">${dayLabel}</div>
+        <div class="forecast-day-icon">${wIcon(f.wcode)}</div>
+        <div class="forecast-day-temp">${Math.round(f.tmax)}°</div>
+        <div class="forecast-day-precip${f.precip>0?' has-rain':''}">${f.precip>0?f.precip.toFixed(1)+'mm':'—'}</div>
+        ${windBadge}
+        ${advice?`<div class="forecast-advice forecast-advice-${advice.cls}">${advice.icon}</div>`:''}
+      </div>`;
+    }).join('');
+  }
+
   // Banners
   const heatBanner=document.getElementById('heat-banner');
   const frostBanner=document.getElementById('frost-banner');
+  const windBanner=document.getElementById('wind-banner');
+
   if(weatherData.isHeatwave&&settings.heatEnabled){
     heatBanner.style.display='flex';
     document.getElementById('heat-banner-text').textContent=
-      `Canicule prévue (${Math.round(maxTemp)}°C) — pense à arroser tes tomates et framboises 2× aujourd'hui (matin + soir)`;
+      `Canicule (${Math.round(maxTemp)}°C) — arrose les tomates et framboises 2× aujourd'hui`;
   } else heatBanner.style.display='none';
 
   if(weatherData.isFrost){
     frostBanner.style.display='flex';
     document.getElementById('frost-banner-text').textContent=
-      `Gel possible cette nuit (${Math.round(minTemp)}°C) — rentre le kalanchoé et les œillets !`;
+      `Gel possible (${Math.round(minTemp)}°C) — rentre le kalanchoé et les œillets !`;
   } else frostBanner.style.display='none';
+
+  if(windBanner){
+    if(isWindy){
+      windBanner.style.display='flex';
+      document.getElementById('wind-banner-text').textContent=
+        isVeryWindy
+          ? `Vent très fort (${Math.round(maxGust)}km/h) — déplace les pots légers, arrose tôt le matin`
+          : `Rafales prévues (${Math.round(maxGust)}km/h) — tes plantes vont sécher plus vite, arrose ce matin`;
+    } else windBanner.style.display='none';
+  }
 }
+
 
 // ══════════════════════════════════════════
 //  SEASON BAR
@@ -791,7 +1041,118 @@ function renderDate(){
     new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
 }
 
+// ══════════════════════════════════════════
+//  SCORE DE SANTÉ
+// ══════════════════════════════════════════
+function calcPlantScore(p){
+  let score = 100;
+  const d = daysSince(p.lastWatered);
+  const ef = effectiveFreq(p);
+
+  // ── Arrosage (50 pts) ──
+  if(d === 999){
+    score -= 50; // jamais arrosé
+  } else {
+    const retard = d - ef;
+    if(retard > 0) score -= Math.min(50, retard * 15);
+    else if(d === 0) score += 0; // arrosé aujourd'hui = parfait
+  }
+
+  // ── Météo stress (20 pts) ──
+  if(weatherData){
+    if(weatherData.isHeatwave && p.waterNeed === 'high') score -= 15;
+    else if(weatherData.isHeatwave) score -= 8;
+    if(weatherData.isFrost) score -= 10;
+    if(weatherData.isWindy && p.waterNeed !== 'low') score -= 5;
+  }
+
+  // ── Diagnostic IA récent (20 pts) ──
+  const recentDiag = diagHistory.filter(d => d.plantId === p.id).slice(0,1)[0];
+  if(recentDiag){
+    const diagAge = (Date.now() - new Date(recentDiag.date).getTime()) / 86400000;
+    if(diagAge <= 7){ // diagnostic des 7 derniers jours
+      if(recentDiag.severity === 'URGENT') score -= 20;
+      else if(recentDiag.severity === 'ATTENTION') score -= 10;
+      // OK = pas de malus
+    }
+  }
+
+  // ── Phase saisonnière (10 pts) ──
+  if(p.libKey){
+    const lib = PLANT_LIBRARY.find(x => x.key === p.libKey);
+    if(lib){
+      const phase = lib.months[new Date().getMonth()+1];
+      if(phase === 'dormant') score -= 5; // en dormance, moins de vitalité visible
+    }
+  }
+
+  // ── Bonus régularité sur 7 jours ──
+  const recentWaterings = history.filter(h =>
+    h.plantId === p.id &&
+    (Date.now() - new Date(h.date).getTime()) < 7 * 86400000
+  ).length;
+  const expectedWaterings = Math.ceil(7 / ef);
+  if(recentWaterings >= expectedWaterings) score += 5; // bonus régularité
+
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
+function calcGlobalScore(){
+  if(!plants.length) return null;
+  const scores = plants.map(p => calcPlantScore(p));
+  const avg = Math.round(scores.reduce((a,b) => a+b, 0) / scores.length);
+
+  // Critères détaillés
+  const criteria = [];
+  const urgentCount = plants.filter(p => getPlantStatus(p) === 'urgent').length;
+  const wateredToday = plants.filter(p => isWateredToday(p)).length;
+  const diagIssues = plants.filter(p => {
+    const d = diagHistory.filter(x=>x.plantId===p.id).slice(0,1)[0];
+    return d && d.severity === 'URGENT' && (Date.now()-new Date(d.date).getTime()) < 7*86400000;
+  }).length;
+
+  if(urgentCount === 0) criteria.push('✅ Tout arrosé');
+  else criteria.push(`💧 ${urgentCount} en attente`);
+  criteria.push(`🌿 ${wateredToday}/${plants.length} aujourd'hui`);
+  if(weatherData?.isHeatwave) criteria.push('🔥 Stress thermique');
+  if(weatherData?.isWindy) criteria.push('💨 Vent fort');
+  if(diagIssues > 0) criteria.push(`⚠️ ${diagIssues} diagnostic urgent`);
+
+  const label = avg >= 80 ? 'Excellent 🌟' : avg >= 60 ? 'Bon 👍' : avg >= 40 ? 'À surveiller ⚠️' : 'Critique 🚨';
+
+  return { avg, criteria, label, scores };
+}
+
+function renderGlobalScore(){
+  const result = calcGlobalScore();
+  const card = document.getElementById('global-score-card');
+  if(!result || !plants.length){ if(card) card.style.display='none'; return; }
+
+  card.style.display='flex';
+  const { avg, criteria, label } = result;
+
+  // Couleur selon score
+  const color = avg>=80?'#81c784':avg>=60?'#aed581':avg>=40?'#ffb74d':'#ef9a9a';
+
+  // Cercle SVG
+  const circumference = 2 * Math.PI * 23; // ~144.51
+  const offset = circumference - (avg / 100) * circumference;
+  const circle = document.getElementById('score-circle-fill');
+  if(circle){
+    circle.style.stroke = color;
+    circle.style.strokeDashoffset = offset;
+  }
+
+  document.getElementById('global-score-num').textContent = avg;
+  document.getElementById('global-score-num').style.color = color;
+  document.getElementById('global-score-title').textContent = label;
+  document.getElementById('global-score-sub').textContent = `Moyenne de ${plants.length} plante${plants.length>1?'s':''}`;
+  document.getElementById('global-score-detail').innerHTML =
+    criteria.map(c => `<span class="score-criterion">${c}</span>`).join('');
+}
+
 function renderSummary(){
+  renderGlobalScore();
   const urgent=plants.filter(p=>['urgent','today'].includes(getPlantStatus(p)));
   const done=plants.filter(p=>isWateredToday(p));
   document.getElementById('summary-pills').innerHTML=`
@@ -800,6 +1161,8 @@ function renderSummary(){
     ${weatherData?.isHeatwave?`<div class="pill" style="background:rgba(255,112,67,.12);border:1px solid rgba(255,112,67,.3);color:var(--heat)">🔥 Canicule</div>`:''}
   `;
 }
+
+
 
 function plantCard(p){
   const s=getPlantStatus(p);
@@ -812,8 +1175,19 @@ function plantCard(p){
   const actionBtn=s==='done'
     ?`<button class="plant-action done-btn" onclick="undoWater(${p.id});event.stopPropagation()">↩️</button>`
     :`<button class="plant-action water-btn" id="water-btn-${p.id}" onclick="waterPlant(${p.id});event.stopPropagation()">💧</button>`;
+  const diagBtn=`<button class="diag-btn" onclick="openDiag(${p.id});event.stopPropagation()" title="Diagnostic photo">📸</button>`;
   const seasonNote=isAdjusted
     ?`<div class="plant-freq-adjusted">${SEASON_INFO[getSeason()].icon} Fréquence saisonnière: ${freqLabel(ef)}</div>`:'';
+  const score=calcPlantScore(p);
+  const scoreColor=score>=80?'#81c784':score>=60?'#aed581':score>=40?'#ffb74d':'#ef9a9a';
+  const scoreLabelClass=score>=80?'score-excellent':score>=60?'score-bon':score>=40?'score-moyen':'score-faible';
+  const scoreBar=`<div style="margin-top:5px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div class="health-score-label ${scoreLabelClass}">Santé ${score}/100</div>
+    </div>
+    <div class="health-score-bar"><div class="health-score-fill" style="width:${score}%;background:${scoreColor}"></div></div>
+  </div>`;
+
   const cardHtml=`<div class="plant-card ${s}${heatClass}" id="card-${p.id}" data-plant-id="${p.id}" data-watered="${s==='done'?1:0}" onclick="handleCardClick(${p.id},event)">
     <div class="plant-emoji">${p.emoji}</div>
     <div class="plant-info">
@@ -821,9 +1195,10 @@ function plantCard(p){
       <div class="plant-status ${s}">${getStatusText(p)}</div>
       <div class="plant-freq">${freqLabel(p.freq)} · ${'💧'.repeat(p.waterNeed==='high'?3:p.waterNeed==='medium'?2:1)}</div>
       ${seasonNote}
+      ${scoreBar}
     </div>
     <span class="days-badge ${badgeClass}">${badgeText}</span>
-    ${actionBtn}
+    ${actionBtn}${diagBtn}
   </div>`;
   // Wrap watered-today cards in a swipe container to allow cancel via slide
   if(s==='done'){
@@ -999,9 +1374,22 @@ function renderSettings(){
   if(el('rain-toggle')) el('rain-toggle').checked=settings.rainEnabled!==false;
   if(el('heat-toggle')) el('heat-toggle').checked=settings.heatEnabled!==false;
   if(el('season-toggle')) el('season-toggle').checked=settings.seasonEnabled!==false;
+  if(el('theme-toggle')) el('theme-toggle').checked=settings.theme==='light';
   if(gpsCoords&&el('gps-setting-status'))
     el('gps-setting-status').textContent=`Actif · ${gpsCoords.lat.toFixed(3)}, ${gpsCoords.lon.toFixed(3)}`;
   updateNotifUI();
+}
+
+function handleThemeToggle(cb){
+  settings.theme = cb.checked ? 'light' : 'dark';
+  saveData();
+  applyTheme();
+}
+
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', settings.theme==='light' ? 'light' : '');
+  const tog = document.getElementById('theme-toggle');
+  if(tog) tog.checked = settings.theme==='light';
 }
 function saveAlertTime(v){settings.alertTime=v;saveData();scheduleNotifications()}
 function saveRainPref(v){settings.rainEnabled=v;saveData();renderAll()}
@@ -1126,7 +1514,8 @@ function openLibrary(){
 }
 
 function plantAlreadyAdded(key){
-  return plants.some(p=>p.libKey===key);
+  // On ne bloque plus l'ajout — on permet plusieurs pieds de la même plante
+  return false;
 }
 
 function renderLibrary(){
@@ -1144,7 +1533,6 @@ function renderLibrary(){
     const phase=getCurrentPhase(p);
     const added=plantAlreadyAdded(p.key);
     return `<div class="lib-card" style="position:relative" onclick="openPlantDetail('${p.key}')">
-      ${added?'<div class="added-check">✓</div>':''}
       <div class="lib-emoji">${p.emoji}</div>
       <div class="lib-name">${p.name}</div>
       <div class="lib-cat">${p.category}</div>
@@ -1384,6 +1772,191 @@ function saveManualWatering(){
 }
 
 // ══════════════════════════════════════════
+//  DIAGNOSTIC PHOTO IA
+// ══════════════════════════════════════════
+const DIAG_HISTORY_KEY = 'diag_history';
+let diagPlantId = null;
+let diagHistory = [];
+
+function loadDiagHistory(){
+  try { diagHistory = JSON.parse(localStorage.getItem(DIAG_HISTORY_KEY)) || []; } catch { diagHistory = []; }
+}
+function saveDiagHistory(){
+  localStorage.setItem(DIAG_HISTORY_KEY, JSON.stringify(diagHistory.slice(0, 50)));
+}
+
+function openDiag(plantId){
+  diagPlantId = plantId;
+  const p = plants.find(x => x.id === plantId);
+  if(!p) return;
+
+  document.getElementById('diag-plant-name').textContent = p.name;
+  document.getElementById('diag-plant-emoji').textContent = p.emoji;
+  document.getElementById('diag-plant-subtitle').textContent = `Prends ou uploade une photo de ${p.name.toLowerCase()}`;
+
+  resetDiag();
+
+  // Show previous diagnoses for this plant
+  const prev = diagHistory.filter(d => d.plantId === plantId);
+  const histEl = document.getElementById('diag-history');
+  const histList = document.getElementById('diag-history-list');
+  if(prev.length){
+    histEl.style.display = 'block';
+    histList.innerHTML = prev.slice(0, 3).map(d => `
+      <div class="diag-history-item">
+        <div class="diag-history-date">${new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long'})} · ${new Date(d.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
+        <div class="diag-history-summary">${d.summary}</div>
+      </div>`).join('');
+  } else {
+    histEl.style.display = 'none';
+  }
+
+  openSheet('sheet-diag');
+}
+
+function resetDiag(){
+  document.getElementById('diag-preview').style.display = 'none';
+  document.getElementById('diag-preview').src = '';
+  document.getElementById('diag-result').style.display = 'none';
+  document.getElementById('diag-analyzing').style.display = 'none';
+  document.getElementById('diag-upload-zone').style.display = 'block';
+  document.getElementById('diag-file-input').value = '';
+}
+
+async function handleDiagPhoto(input){
+  const file = input.files[0];
+  if(!file) return;
+
+  // Show preview
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const preview = document.getElementById('diag-preview');
+    preview.src = e.target.result;
+    preview.style.display = 'block';
+    document.getElementById('diag-upload-zone').style.display = 'none';
+    await runDiagAnalysis(e.target.result.split(',')[1]);
+  };
+  reader.readAsDataURL(file);
+}
+
+async function runDiagAnalysis(base64Image){
+  document.getElementById('diag-analyzing').style.display = 'block';
+  document.getElementById('diag-result').style.display = 'none';
+
+  const p = plants.find(x => x.id === diagPlantId);
+  const lib = p?.libKey ? PLANT_LIBRARY.find(x => x.key === p.libKey) : null;
+  const s = getSeason();
+  const seasonLabel = {spring:'printemps',summer:'été',autumn:'automne',winter:'hiver'}[s];
+  const lastWateredDays = p ? daysSince(p.lastWatered) : '?';
+  const weatherCtx = weatherData
+    ? `Météo actuelle: ${Math.round(weatherData.minTemp)}–${Math.round(weatherData.maxTemp)}°C, précipitations 12h: ${weatherData.totalPrecip12h?.toFixed(1)}mm.`
+    : '';
+
+  const prompt = `Tu es un expert horticole. Analyse cette photo de ${p?.name || 'plante'} (${lib?.category || 'plante de balcon'}) et fournis un diagnostic précis.
+
+Contexte :
+- Saison : ${seasonLabel}
+- Dernier arrosage : il y a ${lastWateredDays === 999 ? 'longtemps (inconnu)' : lastWateredDays + ' jour(s)'}
+- Fréquence d'arrosage habituelle : tous les ${p?.freq || '?'} jour(s)
+- Besoin en eau : ${p?.waterNeed === 'high' ? 'élevé' : p?.waterNeed === 'medium' ? 'moyen' : 'faible'}
+${weatherCtx}
+${lib ? `- Phase actuelle de la plante : ${PHASE_INFO[lib.months[new Date().getMonth()+1]]?.label || ''}` : ''}
+
+Réponds en français avec ce format EXACT (respecte les balises) :
+
+SÉVÉRITÉ: [OK / ATTENTION / URGENT]
+RÉSUMÉ: [1 phrase résumant l'état général]
+
+DIAGNOSTIC:
+[2-4 phrases décrivant précisément ce que tu observes sur la photo : couleur des feuilles, aspect des tiges, signes visibles de stress, maladies, carences, etc.]
+
+CAUSES PROBABLES:
+[Liste courte des causes identifiées]
+
+ACTIONS:
+[Liste numérotée de 2-4 actions concrètes à faire maintenant, dans l'ordre de priorité]
+
+PRÉVENTION:
+[1-2 conseils pour éviter ce problème à l'avenir]`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: [
+            { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: base64Image }},
+            { type: 'text', text: prompt }
+          ]
+        }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.[0]?.text || '';
+
+    // Parse severity
+    const sevMatch = text.match(/SÉVÉRITÉ:\s*(OK|ATTENTION|URGENT)/i);
+    const severity = sevMatch?.[1]?.toUpperCase() || 'ATTENTION';
+    const summaryMatch = text.match(/RÉSUMÉ:\s*(.+)/i);
+    const summary = summaryMatch?.[1]?.trim() || 'Analyse effectuée';
+
+    // Display result
+    document.getElementById('diag-analyzing').style.display = 'none';
+    document.getElementById('diag-result').style.display = 'block';
+
+    const sevConfig = {
+      OK: { label: '✅ Bonne santé', cls: 'ok' },
+      ATTENTION: { label: '⚠️ Surveillance recommandée', cls: 'warn' },
+      URGENT: { label: '🚨 Action urgente requise', cls: 'danger' }
+    }[severity] || { label: '⚠️ À surveiller', cls: 'warn' };
+
+    document.getElementById('diag-severity-badge').innerHTML =
+      `<div class="diag-severity ${sevConfig.cls}">${sevConfig.label}</div>`;
+
+    // Clean and format text for display
+    const cleanText = text
+      .replace(/SÉVÉRITÉ:.*\n?/i, '')
+      .replace(/RÉSUMÉ:.*\n?/i, '')
+      .trim();
+    document.getElementById('diag-result-text').textContent = cleanText;
+
+    // Save to history
+    diagHistory.unshift({
+      plantId: diagPlantId,
+      plantName: p?.name,
+      date: new Date().toISOString(),
+      severity,
+      summary,
+      fullText: cleanText
+    });
+    saveDiagHistory();
+
+    // Refresh history display
+    const histList = document.getElementById('diag-history-list');
+    const prev = diagHistory.filter(d => d.plantId === diagPlantId);
+    if(prev.length > 1){
+      document.getElementById('diag-history').style.display = 'block';
+      histList.innerHTML = prev.slice(1, 4).map(d => `
+        <div class="diag-history-item">
+          <div class="diag-history-date">${new Date(d.date).toLocaleDateString('fr-FR',{day:'numeric',month:'long'})}</div>
+          <div class="diag-history-summary">${d.summary}</div>
+        </div>`).join('');
+    }
+
+  } catch(err) {
+    document.getElementById('diag-analyzing').style.display = 'none';
+    document.getElementById('diag-result').style.display = 'block';
+    document.getElementById('diag-severity-badge').innerHTML = `<div class="diag-severity warn">⚠️ Erreur d'analyse</div>`;
+    document.getElementById('diag-result-text').textContent = 'Impossible d\'analyser la photo. Vérifie ta connexion et réessaie.';
+  }
+}
+
+// ══════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════
 async function registerSW(){
@@ -1395,6 +1968,8 @@ async function registerSW(){
 }
 
 loadData();
+loadDiagHistory();
+applyTheme();
 renderAll();
 fetchWeather(); // uses GPS if saved, else geocoding
 registerSW();
